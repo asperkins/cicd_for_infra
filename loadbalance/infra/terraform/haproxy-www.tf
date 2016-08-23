@@ -1,8 +1,16 @@
+resource "digitalocean_volume" "cache_volume" {
+    region      = "nyc1"
+    name        = "cache"
+    size        = 100
+    description = "Cache Volume"
+}
+
 resource "digitalocean_droplet" "haproxy-www" {
     image = "ubuntu-14-04-x64"
     name = "haproxy-www"
     region = "nyc2"
     size = "512mb"
+    volume_ids = ["${digitalocean_volume.cache_volume.id}"]
     private_networking = true
     ssh_keys = [
       "${var.ssh_fingerprint}"
@@ -14,6 +22,7 @@ resource "digitalocean_droplet" "haproxy-www" {
       key_file = "${var.pvt_key}"
       timeout = "2m"
   }
+  
  provisioner "remote-exec" {
     inline = [
       "export PATH=$PATH:/usr/bin",

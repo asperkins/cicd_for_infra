@@ -22,4 +22,10 @@ resource "digitalocean_droplet" "tower" {
     ]
   }
 }
+# Create a new SSH key
+resource "digitalocean_ssh_key" "ansible" {
+  name = "Ansible Key"
+  public_key = "${var.pub_key}"
+}
+
 
