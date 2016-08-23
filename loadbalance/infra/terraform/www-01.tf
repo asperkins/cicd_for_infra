@@ -14,4 +14,3 @@ resource "digitalocean_droplet" "www-1" {
     timeout = "2m"
   }
 }
-
