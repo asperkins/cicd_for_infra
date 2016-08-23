@@ -1,6 +1,7 @@
 if [ -f "/etc/ansible/setenv.sh" ]
 	then
-	eval $(ansible-vault view /etc/ansible/setenv.sh --vault-password-file=/etc/ansible/vault_password)
+#	eval $(ansible-vault view /etc/ansible/setenv.sh --vault-password-file=/etc/ansible/vault_password)
+  . /etc/ansible/setenv.sh
 fi
 
 check_env(){
