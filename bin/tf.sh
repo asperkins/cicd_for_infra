@@ -1,4 +1,4 @@
-if [ ! -f "/etc/ansible/setenv.sh" ]
+if [ -f "/etc/ansible/setenv.sh" ]
 	then
 	eval $(ansible-vault view /etc/ansible/setenv.sh --vault-password-file=/etc/ansible/vault_password)
 fi
@@ -13,7 +13,7 @@ WORKSPACE=$2
 
 check_env
 
-xterraform $1\
+terraform $1\
   -var "do_token=\"${DO_PAT}\""\
   -var "pub_key=\"$PUB_KEY\""\
   -var "pvt_key=\"$PVT_KEY\""\
