@@ -15,7 +15,6 @@ WORKSPACE=$2
 check_env
 
 terraform $1\
-  -out "$WORKSPACE/plan.out"\
   -detailed-exitcode\
   -var "do_token=\"${DO_PAT}\""\
   -var "pub_key=\"$PUB_KEY\""\
