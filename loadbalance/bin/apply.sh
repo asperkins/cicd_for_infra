@@ -17,5 +17,5 @@ terraform apply\
   -var "pub_key=\"$PUB_KEY\""\
   -var "pvt_key=\"$PVT_KEY\""\
   -var "ssh_fingerprint=\"$SSH_FINGERPRINT\""\
-  -var "workspace=\"../infra/terraform\""\
-  ../infra/terraform
+  -var "workspace=\"loadbalance/infra/terraform\""\
+  loadbalance/infra/terraform

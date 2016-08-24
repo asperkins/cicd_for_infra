@@ -1,5 +1,4 @@
 node {
-  ws(pwd()){
     stage 'Checkout'
     git url: 'https://github.com/asperkins/cicd_iac_example.git'
     wrap([$class: 'AnsiColorBuildWrapper', colorMapName: 'xterm']) {
@@ -11,32 +10,13 @@ node {
         if (fileExists("status")) {
             sh "rm status"
         }
-        sh """
-          . /etc/ansible/setenv.sh; 
-          terraform plan -detailed-exitcode\
-          -var \"do_token=\"\${DO_PAT}\"\"\
-          -var \"pub_key=\"\$PUB_KEY\"\"\
-          -var \"pvt_key=\"\$PVT_KEY\"\"\
-          -var \"ssh_fingerprint=\"\$SSH_FINGERPRINT\"\"\
-          -var \"workspace=\"loadbalance/infra/terraform\"\"\
-          loadbalance/infra/terraform
-          """
+        sh "loadbalance/bin/plan.sh"
         input message: 'Apply Plan?', ok: 'Apply'
        
         if (apply) {          
             stage name: 'Apply', concurrency: 1
-            sh """
-              . /etc/ansible/setenv.sh; 
-              terraform plan -detailed-exitcode\
-              -var "do_token=\"\${DO_PAT}\""\
-              -var "pub_key=\"\$PUB_KEY\""\
-              -var "pvt_key=\"\$PVT_KEY\""\
-              -var "ssh_fingerprint=\"\$SSH_FINGERPRINT\""\
-              -var "workspace=\"loadbalance/infra/terraform\""\
-              loadbalance/infra/terraform
-              """
-              }
-              }
-
-  }
+            sh "loadbalance/bin/apply.sh"      
+        }
+    }
 }
+
