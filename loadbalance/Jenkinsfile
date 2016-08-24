@@ -11,12 +11,10 @@ node {
             sh "rm status"
         }
         sh "loadbalance/bin/plan.sh"
-        input message: 'Apply Plan?', ok: 'Apply'
+        input message: 'Apply Plan', ok: 'Apply'
        
-        if (apply) {          
-            stage name: 'Apply', concurrency: 1
-            sh "loadbalance/bin/apply.sh"      
-        }
+        stage name: 'Apply', concurrency: 1
+        sh "loadbalance/bin/apply.sh"      
     }
 }
 
