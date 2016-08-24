@@ -13,7 +13,6 @@ check_env(){
 check_env
 
 terraform plan\
-  -detailed-exitcode\
   -var "do_token=\"${DO_PAT}\""\
   -var "pub_key=\"$PUB_KEY\""\
   -var "pvt_key=\"$PVT_KEY\""\
