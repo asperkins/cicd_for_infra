@@ -14,13 +14,8 @@ WORKSPACE=$2
 
 check_env
 
-if [ "$1" == "plan" ]
-	then
-	PLANFILE="plan.out"
-fi
-
 terraform $1\
-  -out "$WORKSPACE/$PLANFILE"\
+  -out "$WORKSPACE/plan.out"\
   -detailed-exitcode\
   -var "do_token=\"${DO_PAT}\""\
   -var "pub_key=\"$PUB_KEY\""\
